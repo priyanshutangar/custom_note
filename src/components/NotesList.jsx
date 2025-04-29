@@ -3,10 +3,13 @@ import { loadNotes } from '../utils/storage';
 
 function NotesList() {
   const [notes, setNotes] = useState([]);
+  // used useState to store the notes in a local state so that they can be rendered and updated reactively.
 
   useEffect(() => {
     setNotes(loadNotes());
   }, []);
+  //used useEffect with an empty dependency array so that notes load only once when the component mounts.
+
 
   return (
     <div className="space-y-6">

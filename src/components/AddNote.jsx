@@ -3,6 +3,7 @@ import { saveNotes, loadNotes } from '../utils/storage';
 import toast from 'react-hot-toast';
 
 function AddNote({ onNoteAdded }) {
+  // I used useState to manage the title, content, and loading state of the note form in a reactive way.
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isSaving, setIsSaving] = useState(false);
@@ -11,6 +12,7 @@ function AddNote({ onNoteAdded }) {
     e.preventDefault();
     setIsSaving(true);
 
+     // I included a unique id (using Date.now) and timestamp (createdAt) to uniquely identify and sort notes later.
     const newNote = {
       id: Date.now(),
       title,
@@ -18,14 +20,16 @@ function AddNote({ onNoteAdded }) {
       createdAt: new Date().toISOString(),
     };
 
+    // I used loadNotes() and saveNotes() to persist data in localStorage, so notes remain saved even after refreshing.
     const existingNotes = loadNotes();
     const success = saveNotes([newNote, ...existingNotes]);
 
+    // I used toast notifications to give real-time feedback to the user about saving success or failure.
     if (success) {
       toast.success('Note saved successfully!');
       setTitle('');
       setContent('');
-      onNoteAdded();
+      onNoteAdded(); // switch to My Notes tab
     } else {
       toast.error('Failed to save note');
     }
