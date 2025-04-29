@@ -5,8 +5,7 @@ import NotesList from './components/NotesList';
 import './App.css';
 
 function App() {
-  // Why I chose useState to manage tab and re-render control
-  // I used useState to control the active tab for simple UI switching and to force re-render NotesList after a new note is added.
+  // Used useState to control the active tab for simple UI switching and to force re-render NotesList after a new note is added.
   const [activeTab, setActiveTab] = useState('add');
   const [noteListKey, setNoteListKey] = useState(0);
 
